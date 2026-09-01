@@ -198,7 +198,7 @@ class Display {
                 mEpaper.loop((totalPower), totalYieldDay, totalYieldTotal, nrprod, mApp->getIp(), mApp->isNetworkConnected());
                 mRefreshCycle++;
 
-                if (mRefreshCycle > 8) { // full refresh every ~8 partial updates, per panel manufacturer guidance against ghosting
+                if (mRefreshCycle > 3) { // full refresh every ~3 partial updates - tighter than manufacturer guidance, needed because actualPowerPaged() redraws the whole content area every time
                     mEpaper.fullRefresh();
                     mRefreshCycle = 0;
                 }
