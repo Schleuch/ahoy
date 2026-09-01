@@ -62,6 +62,7 @@ void DisplayEPaper::fullRefresh() {
         return;
     if(mLogoDisplayed)
         return; // no refresh during logo display
+    _display->setFullWindow();   // ensure a TRUE full-mode refresh (was stuck in partial mode, ghosting fix)
     mRefreshState = RefreshStatus::BLACK;
 }
 
