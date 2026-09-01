@@ -198,7 +198,7 @@ class Display {
                 mEpaper.loop((totalPower), totalYieldDay, totalYieldTotal, nrprod, mApp->getIp(), mApp->isNetworkConnected());
                 mRefreshCycle++;
 
-                if (mRefreshCycle > 2880) { // 15 * 2280 = 44300s = 12h
+                if (mRefreshCycle > 8) { // full refresh every ~8 partial updates, per panel manufacturer guidance against ghosting
                     mEpaper.fullRefresh();
                     mRefreshCycle = 0;
                 }
