@@ -1,0 +1,35 @@
+name: Build patched AhoyDTU firmware
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install PlatformIO
+        run: pip install platformio
+
+      - name: Build firmware
+        run: pio run -d src -e esp32-wroom32-de
+
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ahoy-firmware-esp32-wroom32-de
+          path: |
+            src/.pio/build/esp32-wroom32-de/firmware.bin
+            src/.pio/build/esp32-wroom32-de/bootloader.bin
+            src/.pio/build/esp32-wroom32-de/partitions.bin
+            src/.pio/build/esp32-wroom32-de/boot_app0.bin
+          if-no-files-found: warn
